@@ -25,8 +25,15 @@ execute "creating a symbolik link" do
   not_if { FileTest.exists?("/usr/bin/mongodump") }
 end
 
+execute "create MongoDB --dbpath" do
+  Chef::Log.info "Creating dir to hold mongodb data"
+  command "mkdir /data/db"
+  not_if { FileTest.directory?("/data/db") }
+end
+
 execute "start mongodb" do
-  Chef::Log.info "Executing Mongodb"
-  command "sudo /opt/mongodb-linux-i686-#{version}/bin/mongod --journal --fork --logpath /var/log/mongodb.log --logappend"
-  Chef::Log.info "Mongodb executed"
+  Chef::Log.info "Starting Mongodb"
+  command "sudo /opt/mongodb-linux-i686-#{version}/bin/mongod --journal " + \
+  "--fork --dbpath /data/db --logpath /var/log/mongodb.log --logappend"
+  Chef::Log.info "Starting executed"
 end
