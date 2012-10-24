@@ -36,4 +36,5 @@ execute "start mongodb" do
   command "sudo /opt/mongodb-linux-i686-#{version}/bin/mongod --journal " + \
   "--fork --dbpath /data/db --logpath /var/log/mongodb.log --logappend"
   Chef::Log.info "Starting executed"
+  not_if { FileTest.exists?("/data/db/mongod.lock") }
 end
