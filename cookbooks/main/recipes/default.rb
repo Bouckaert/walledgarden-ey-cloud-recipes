@@ -5,6 +5,7 @@
 #end
 
 require_recipe "mongo_solo"
+require_recipe "rabbitmq"
 
 # uncomment to turn on thinking sphinx/ultra sphinx. Remember to edit cookbooks/sphinx/recipes/default.rb first!
 # require_recipe "sphinx"
