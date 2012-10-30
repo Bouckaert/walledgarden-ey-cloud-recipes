@@ -3,12 +3,18 @@
 # Recipe:: default
 #
 
+rabbitmq_version = "2.3.1"
+
+ey_cloud_report "RabbitMQ" do
+  message "installing RabbitMQ #{rabbitmq_version}"
+end
+
 enable_package "net-misc/rabbitmq-server" do
-  version "2.3.1"
+  version rabbitmq_version
 end
 
 package "net-misc/rabbitmq-server" do
-  version "2.3.1"
+  version rabbitmq_version
   action :install
 end
 
