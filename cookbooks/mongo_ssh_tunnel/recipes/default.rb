@@ -9,15 +9,11 @@
 # this value to match before deploying.  Oh, and be sure to add a require_recipe
 # line with the new cookbook name to the main cookbook's default.rb recipe file
 tunnel_name = 'mongo_ssh_tunnel'
-db_instance = node[:engineyard][:environment][:instances].detect do |i|
-  i[:role] =~ /db_master/
-end
-db_host = db_instance[:public_hostname]
 
 # fill in missing information below
 tunnel_vars = {
   # the host hostname (an IP will work) to ssh to
-  :ssh_hostname => db_host,
+  :ssh_hostname => "ec2-107-22-29-124.compute-1.amazonaws.com",
   # only change this if using a non-default ssh port on the destination host,
   # such as when connecting through a gateway
   :ssh_port => 22,
