@@ -51,20 +51,25 @@ tunnel_vars = {
 
 # set this to match on the node[:instance_role] of the instance the tunnel
 # should be set up on
-template "/etc/init.d/#{tunnel_name}" do
-  source "ssh_tunnel.initd.erb"
-  owner 'root'
-  group 'root'
-  mode 0755
-  variables(tunnel_vars)
-end
 
-template "/etc/monit.d/#{tunnel_name}.monitrc" do
-  source "ssh_tunnel.monitrc.erb"
-  owner node[:owner_name]
-  group node[:owner_name]
-  mode 0644
-  variables(tunnel_vars)
-end
+if ['app_master', 'solo'].include?(node[:instance_role])
 
-execute "monit quit"
+  template "/etc/init.d/#{tunnel_name}" do
+    source "ssh_tunnel.initd.erb"
+    owner 'root'
+    group 'root'
+    mode 0755
+    variables(tunnel_vars)
+  end
+
+  template "/etc/monit.d/#{tunnel_name}.monitrc" do
+    source "ssh_tunnel.monitrc.erb"
+    owner node[:owner_name]
+    group node[:owner_name]
+    mode 0644
+    variables(tunnel_vars)
+  end
+
+  execute "monit quit"
+
+end
