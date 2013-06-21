@@ -13,7 +13,7 @@ tunnel_name = 'mongo_ssh_tunnel'
 # fill in missing information below
 tunnel_vars = {
   # the host hostname (an IP will work) to ssh to
-  :ssh_hostname => "deploy@ec2-23-20-4-145.compute-1.amazonaws.com",
+  :ssh_hostname => "ec2-107-20-78-205.compute-1.amazonaws.com",
   # only change this if using a non-default ssh port on the destination host,
   # such as when connecting through a gateway
   :ssh_port => 22,
